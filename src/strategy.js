@@ -16,10 +16,10 @@ const DescendingStrategy = new PriceStrategy('Descending', (product) => {
   let limit = 0;
   if (product.sellIn > 0) {
     product.price = product.price + variationRate;
-    product.sellIn--;
-  } else if (product.sellIn === 0) {
+  } else if (product.sellIn <= 0) {
     product.price = product.price > limit - 2*variationRate ? product.price + 2*variationRate : limit;
   }
+  product.sellIn--;
 });
 
 const AscendingStrategy = new PriceStrategy('Ascending', (product) => {
@@ -27,10 +27,10 @@ const AscendingStrategy = new PriceStrategy('Ascending', (product) => {
   let limit = 50;
   if (product.sellIn > 0) {
     product.price = product.price + variationRate;
-    product.sellIn--;
-  } else if (product.sellIn === 0) {
+  } else if (product.sellIn <= 0) {
     product.price = product.price < limit - 2*variationRate ? product.price + 2*variationRate : limit;
   }
+  product.sellIn--;
 });
 
 const SpecialStrategy = new PriceStrategy('Special', (product) => {
@@ -52,17 +52,21 @@ const SpecialStrategy = new PriceStrategy('Special', (product) => {
   }
 });
 
+const MegaStrategy = new PriceStrategy('Mega', () => {});
+
 const Strategies = [
   DescendingStrategy,
   AscendingStrategy,
-  SpecialStrategy
+  SpecialStrategy,
+  MegaStrategy
 ];
 
 const StrategyMap = {
   'Low Coverage': 'Descending',
   'Medium Coverage': 'Descending',
   'Full Coverage': 'Ascending',
-  'Special Full Coverage': 'Special'
+  'Special Full Coverage': 'Special',
+  'Mega Coverage': 'Mega'
 };
 
 module.exports = {

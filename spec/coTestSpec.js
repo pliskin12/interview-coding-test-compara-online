@@ -63,5 +63,14 @@ describe("Co Test", function() {
     }
   });
 
-  
+  it("should not variate 'Mega Coverage' product", function() {
+    const coTest = new CarInsurance([ new Product("Mega Coverage", 12, 50) ]);
+    const expectedPrice = [50, 50, 50, 50, 50, 50, 50]
+    for (let day = 0; day < expectedPrice.length; day++) {
+      const products = coTest.updatePrice();
+      expect(products[0].name).equal("Mega Coverage");
+      expect(products[0].price).equal(expectedPrice[day]);
+    }
+  });
+
 });
