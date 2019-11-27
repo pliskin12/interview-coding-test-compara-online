@@ -23,6 +23,4 @@ describe("Co Test", function() {
     }
   });
 
-  
-
 });
