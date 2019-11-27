@@ -14,7 +14,7 @@ const DescendingStrategy = new PriceStrategy('Descending', (product) => {
   let limit = 0;
   if (product.sellIn > 0) {
     product.price = product.price + variationRate;
-  } else if (product.sellIn <= 0) {
+  } else {
     product.price = product.price > limit - 2*variationRate ? product.price + 2*variationRate : limit;
   }
   product.sellIn--;
@@ -25,7 +25,7 @@ const AscendingStrategy = new PriceStrategy('Ascending', (product) => {
   let limit = 50;
   if (product.sellIn > 0) {
     product.price = product.price + variationRate;
-  } else if (product.sellIn <= 0) {
+  } else {
     product.price = product.price < limit - 2*variationRate ? product.price + 2*variationRate : limit;
   }
   product.sellIn--;
@@ -57,7 +57,7 @@ const SuperStrategy = new PriceStrategy('Super', (product) => {
   let limit = 0;
   if (product.sellIn > 0) {
     product.price = product.price + variationRate;
-  } else if (product.sellIn <= 0) {
+  } else {
     product.price = product.price > limit - 2*variationRate ? product.price + 2*variationRate : limit;
   }
   product.sellIn--;

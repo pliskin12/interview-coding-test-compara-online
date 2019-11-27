@@ -6,6 +6,12 @@ const Product = coTest.Product;
 
 describe("Co Test", function() {
 
+  it("should auto assign an empty Product list when none is passed to constructor", function() {
+    const coTest = new CarInsurance();
+    const products = coTest.updatePrice();
+    expect(products.length === 0);
+  });
+
   it("should update the price of a product named foo (common) of price 0 and 0 days to sellIn", function() {
     const coTest = new CarInsurance([ new Product("foo", 0, 0) ]);
     const products = coTest.updatePrice();
@@ -25,7 +31,7 @@ describe("Co Test", function() {
 
   it("should decrease the price of a 'Medium Coverage' by one until sellIn and twice as fast after", function() {
     const coTest = new CarInsurance([ new Product("Medium Coverage", 3, 10) ]);
-    const expectedPrice = [9, 8, 7, 5, 3, 1, 0, 0, 0]
+    const expectedPrice = [9, 8, 7, 5, 3, 1, 0, 0, 0, 0]
     for (let day = 0; day < expectedPrice.length; day++) {
       const products = coTest.updatePrice();
       expect(products[0].name).equal("Medium Coverage");
@@ -45,7 +51,7 @@ describe("Co Test", function() {
 
   it("should increase the price of a 'Full Coverage' by one until sellIn and twice as fast after", function() {
     const coTest = new CarInsurance([ new Product("Full Coverage", 3, 39) ]);
-    const expectedPrice = [40, 41, 42, 44, 46, 48, 50]
+    const expectedPrice = [40, 41, 42, 44, 46, 48, 50, 50, 50]
     for (let day = 0; day < expectedPrice.length; day++) {
       const products = coTest.updatePrice();
       expect(products[0].name).equal("Full Coverage");
