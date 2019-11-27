@@ -55,7 +55,7 @@ describe("Co Test", function() {
 
   it("should increase the price of a 'Special Full Coverage' by variable boost", function() {
     const coTest = new CarInsurance([ new Product("Special Full Coverage", 12, 25) ]);
-    const expectedPrice = [26, 27, 29, 31, 33, 35, 37, 40, 43, 46, 49, 50, 0]
+    const expectedPrice = [26, 27, 29, 31, 33, 35, 37, 40, 43, 46, 49, 50, 0, 0, 0]
     for (let day = 0; day < expectedPrice.length; day++) {
       const products = coTest.updatePrice();
       expect(products[0].name).equal("Special Full Coverage");
@@ -63,4 +63,5 @@ describe("Co Test", function() {
     }
   });
 
+  
 });
