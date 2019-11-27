@@ -4,8 +4,7 @@
   "description": "ComparaOnline Software Engineer Test",
   "main": "index.js",
   "scripts": {
-    "test": "mocha spec/*.js",
-    "test:cov": "nyc --reporter=html --reporter=text mocha spec/*.js"
+    "test": "nyc --reporter=html --reporter=text mocha spec/*.js"
   },
   "repository": {
     "type": "git",
