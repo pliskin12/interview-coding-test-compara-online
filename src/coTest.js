@@ -1,3 +1,9 @@
+
+const Strategy = require('./strategy');
+const Strategies = Strategy.Strategies;
+const StrategyMap = Strategy.StrategyMap;
+const StandardStrategy = Strategy.DescendingStrategy;
+
 class Product {
   constructor(name, sellIn, price) {
     this.name = name;
@@ -6,42 +12,12 @@ class Product {
   }
 
   updatePrice() {
-    strategies.find((strategy) => {
-      return strategyMap[this.name] ? strategyMap[this.name] === strategy.name : StandardStrategy;
-    }).updatePrice(this);
+    let stratForProduct = Strategies.find((strategy) => {
+      return StrategyMap[this.name] === strategy.name;
+    }) || StandardStrategy;
+
+    stratForProduct.updatePrice(this);
   }
-};
-
-class PriceStrategy {
-  constructor(name, action) {
-    this.name = name;
-    this.action = action;
-  }
-
-  updatePrice(product) {
-    this.action(product);
-  }
-}
-
-const StandardStrategy = new PriceStrategy('Standard', (product) => {
-  if (product.price > 0 && product.sellIn > 0) {
-    product.price = product.price - 1;
-    product.sellIn--;
-  } else if (product.price > 0 && product.sellIn === 0) {
-    if (product.price >= 2) {
-      product.price = product.price - (2)
-    } else {
-      product.price = 0;
-    }
-  }
-});
-
-const strategies = [
-  StandardStrategy
-];
-
-const strategyMap = {
-  'Low Coverage': 'Standard'
 };
 
 class CarInsurance {
