@@ -73,4 +73,14 @@ describe("Co Test", function() {
     }
   });
 
+  it("should decrease the price of a 'Super Sale' by one until sellIn and twice as fast after", function() {
+    const coTest = new CarInsurance([ new Product("Super Sale", 5, 20) ]);
+    const expectedPrice = [18, 16, 14, 12, 10, 6, 2, 0, 0]
+    for (let day = 0; day < expectedPrice.length; day++) {
+      const products = coTest.updatePrice();
+      expect(products[0].name).equal("Super Sale");
+      expect(products[0].price).equal(expectedPrice[day]);
+    }
+  });
+
 });

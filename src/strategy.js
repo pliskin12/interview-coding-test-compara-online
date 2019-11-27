@@ -1,5 +1,3 @@
-const Utils = require('./util');
-
 class PriceStrategy {
   constructor(name, action) {
     this.name = name;
@@ -54,11 +52,23 @@ const SpecialStrategy = new PriceStrategy('Special', (product) => {
 
 const MegaStrategy = new PriceStrategy('Mega', () => {});
 
+const SuperStrategy = new PriceStrategy('Super', (product) => {
+  let variationRate = -2;
+  let limit = 0;
+  if (product.sellIn > 0) {
+    product.price = product.price + variationRate;
+  } else if (product.sellIn <= 0) {
+    product.price = product.price > limit - 2*variationRate ? product.price + 2*variationRate : limit;
+  }
+  product.sellIn--;
+});
+
 const Strategies = [
   DescendingStrategy,
   AscendingStrategy,
   SpecialStrategy,
-  MegaStrategy
+  MegaStrategy,
+  SuperStrategy
 ];
 
 const StrategyMap = {
@@ -66,7 +76,8 @@ const StrategyMap = {
   'Medium Coverage': 'Descending',
   'Full Coverage': 'Ascending',
   'Special Full Coverage': 'Special',
-  'Mega Coverage': 'Mega'
+  'Mega Coverage': 'Mega',
+  'Super Sale': 'Super'
 };
 
 module.exports = {
